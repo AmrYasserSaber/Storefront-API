@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        
+        {
+            "type": "vscode-edge-devtools.debug",
+            "name": "localhost:3000/api/Orders/",
+            "request": "launch",
+            "url": "localhost:3000/api/Orders/"
+        }
+    ]
+}

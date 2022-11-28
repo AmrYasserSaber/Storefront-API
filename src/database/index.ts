@@ -3,7 +3,7 @@ import config from '../config';
 
 const pool = new Pool({
     host: config.host,
-    database: config.database,
+    database: config.db,
     user: config.user,
     password: config.password,
     port: parseInt(config.dbport as string, 10),

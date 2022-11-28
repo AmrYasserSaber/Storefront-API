@@ -9,9 +9,7 @@ var helmet_1 = __importDefault(require("helmet"));
 var express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 var routes_1 = __importDefault(require("./routes"));
 var error_middleware_1 = __importDefault(require("./middleware/error.middleware"));
-var config_1 = __importDefault(require("./config"));
 var database_1 = __importDefault(require("./database"));
-console.log(config_1.default);
 var PORT = process.env.PORT || 3000;
 // create an instance server
 var app = (0, express_1.default)();
@@ -30,10 +28,9 @@ app.use((0, express_rate_limit_1.default)({
     message: 'Too many requests from this IP'
 }));
 app.use('/api', routes_1.default);
-// add routing for / path
 app.get('/', function (req, res) {
     res.json({
-        message: 'Hello World 🌍'
+        message: 'WELCOME TO THE MAIN PAGE'
     });
 });
 database_1.default.connect().then(function (client) {
@@ -41,7 +38,6 @@ database_1.default.connect().then(function (client) {
         .query('SELECT NOW()')
         .then(function (res) {
         client.release();
-        console.log(res.rows);
     })
         .catch(function (err) {
         client.release();

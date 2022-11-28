@@ -4,9 +4,7 @@ import helmet from 'helmet';
 import RateLimit from 'express-rate-limit';
 import routes from './routes';
 import errormiddleware from './middleware/error.middleware';
-import config from './config';
 import db from './database';
-console.log(config);
 
 const PORT = process.env.PORT || 3000;
 // create an instance server
@@ -27,21 +25,20 @@ app.use(
         message: 'Too many requests from this IP'
     })
 );
+
 app.use('/api', routes);
-// add routing for / path
+
 app.get('/', (req: Request, res: Response) => {
     res.json({
-        message: 'Hello World 🌍'
+        message: 'WELCOME TO THE MAIN PAGE'
     });
 });
-
 
 db.connect().then((client) => {
     return client
         .query('SELECT NOW()')
         .then((res) => {
             client.release();
-            console.log(res.rows);
         })
         .catch((err) => {
             client.release();

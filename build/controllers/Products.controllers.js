@@ -50,24 +50,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authenticate = exports.deleteUser = exports.ChooseUser = exports.updateUser = exports.getAllUsers = exports.create = void 0;
-var user_model_1 = __importDefault(require("../models/user.model"));
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var config_1 = __importDefault(require("../config"));
-var usermodel = new user_model_1.default();
+exports.deleteProduct = exports.ChooseProduct = exports.updateProduct = exports.getAllProducts = exports.create = void 0;
+var Products_model_1 = __importDefault(require("../models/Products.model"));
+var Productmodel = new Products_model_1.default();
 var create = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, error_1;
+    var Product, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usermodel.create(req.body)];
+                return [4 /*yield*/, Productmodel.create(req.body)];
             case 1:
-                user = _a.sent();
+                Product = _a.sent();
                 res.json({
                     status: 'succes',
-                    data: __assign({}, user),
-                    message: 'done creating the user'
+                    data: __assign({}, Product),
+                    message: 'done creating the Product'
                 });
                 return [3 /*break*/, 3];
             case 2:
@@ -79,19 +77,19 @@ var create = function (req, res, next) { return __awaiter(void 0, void 0, void 0
     });
 }); };
 exports.create = create;
-var getAllUsers = function (_req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_2;
+var getAllProducts = function (_req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var Products, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usermodel.getAllUsers()];
+                return [4 /*yield*/, Productmodel.getAllProducts()];
             case 1:
-                users = _a.sent();
+                Products = _a.sent();
                 res.json({
                     status: 'succes',
-                    data: { users: users },
-                    message: 'fetched the users'
+                    data: { Products: Products },
+                    message: 'fetched the Products'
                 });
                 return [3 /*break*/, 3];
             case 2:
@@ -102,20 +100,20 @@ var getAllUsers = function (_req, res, next) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
-exports.getAllUsers = getAllUsers;
-var updateUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, error_3;
+exports.getAllProducts = getAllProducts;
+var updateProduct = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var Product, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usermodel.updateUser(req.body)];
+                return [4 /*yield*/, Productmodel.updateProduct(req.body)];
             case 1:
-                user = _a.sent();
+                Product = _a.sent();
                 res.json({
                     status: 'succes',
-                    data: user,
-                    message: 'updated the user'
+                    data: Product,
+                    message: 'updated the Product'
                 });
                 return [3 /*break*/, 3];
             case 2:
@@ -126,20 +124,20 @@ var updateUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-exports.updateUser = updateUser;
-var ChooseUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, error_4;
+exports.updateProduct = updateProduct;
+var ChooseProduct = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var Product, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usermodel.ChooseUser(req.params.id)];
+                return [4 /*yield*/, Productmodel.ChooseProduct(req.params.id)];
             case 1:
-                user = _a.sent();
+                Product = _a.sent();
                 res.json({
                     status: 'succes',
-                    data: { user: user },
-                    message: 'fetched the user'
+                    data: { Product: Product },
+                    message: 'fetched the Product'
                 });
                 return [3 /*break*/, 3];
             case 2:
@@ -150,20 +148,20 @@ var ChooseUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-exports.ChooseUser = ChooseUser;
-var deleteUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, error_5;
+exports.ChooseProduct = ChooseProduct;
+var deleteProduct = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var Product, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usermodel.deleteUser(req.params.id)];
+                return [4 /*yield*/, Productmodel.deleteProduct(req.params.id)];
             case 1:
-                user = _a.sent();
+                Product = _a.sent();
                 res.json({
                     status: 'succes',
-                    data: { user: user },
-                    message: 'successfully deleted the user'
+                    data: { Product: Product },
+                    message: 'successfully deleted the Product'
                 });
                 return [3 /*break*/, 3];
             case 2:
@@ -174,34 +172,4 @@ var deleteUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-exports.deleteUser = deleteUser;
-var authenticate = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, user_name, password, user, token, error_6;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, user_name = _a.user_name, password = _a.password;
-                return [4 /*yield*/, usermodel.authenticate(user_name, password)];
-            case 1:
-                user = _b.sent();
-                token = jsonwebtoken_1.default.sign({ user: user }, config_1.default.tokenSecret);
-                if (!user) {
-                    return [2 /*return*/, res.status(400).json({
-                            status: 'error',
-                            message: 'worng password or user_name'
-                        })];
-                }
-                return [2 /*return*/, res.json({
-                        status: 'success',
-                        data: __assign(__assign({}, user), { token: token }),
-                        message: "successfully authenticated the user"
-                    })];
-            case 2:
-                error_6 = _b.sent();
-                return [2 /*return*/, next(error_6)];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.authenticate = authenticate;
+exports.deleteProduct = deleteProduct;

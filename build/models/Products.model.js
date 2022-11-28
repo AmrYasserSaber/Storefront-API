@@ -41,16 +41,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../database"));
 var uuid_1 = require("uuid");
-var config_1 = __importDefault(require("../config"));
-var bcrypt_1 = __importDefault(require("bcrypt"));
-var hashPassword = function (password) {
-    var salt = parseInt(config_1.default.salt, 10);
-    return bcrypt_1.default.hashSync("".concat(password).concat(config_1.default.pepper), salt);
-};
-var UserModel = /** @class */ (function () {
-    function UserModel() {
+var ProductModel = /** @class */ (function () {
+    function ProductModel() {
     }
-    UserModel.prototype.getAllUsers = function () {
+    ProductModel.prototype.getAllProducts = function () {
         return __awaiter(this, void 0, void 0, function () {
             var connect, SQLOrder, result, error_1;
             return __generator(this, function (_a) {
@@ -60,7 +54,7 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connect = _a.sent();
-                        SQLOrder = "SELECT id,user_name,firstname,lastname FROM users";
+                        SQLOrder = "SELECT id,name,price FROM Products";
                         return [4 /*yield*/, connect.query(SQLOrder)];
                     case 2:
                         result = _a.sent();
@@ -68,13 +62,13 @@ var UserModel = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         error_1 = _a.sent();
-                        throw new Error("couldn't return users ".concat(error_1.message));
+                        throw new Error("couldn't return Products ".concat(error_1.message));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserModel.prototype.create = function (user) {
+    ProductModel.prototype.create = function (Product) {
         return __awaiter(this, void 0, void 0, function () {
             var connect, SQLOrder, result, error_2;
             return __generator(this, function (_a) {
@@ -84,17 +78,15 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connect = _a.sent();
-                        SQLOrder = "INSERT INTO users (id,user_name,firstname,lastname,password)\n            values ($1,$2,$3,$4,$5) returning id,user_name,firstname,lastname";
-                        if (user.id) {
+                        SQLOrder = "INSERT INTO Products (id,name,price)\n            values ($1,$2,$3) returning id,name,price";
+                        if (Product.id) {
                             throw new Error("please don't enter any id");
                         }
-                        user.id = (0, uuid_1.v1)();
+                        Product.id = (0, uuid_1.v1)();
                         return [4 /*yield*/, connect.query(SQLOrder, [
-                                user.id,
-                                user.user_name,
-                                user.firstname,
-                                user.lastname,
-                                hashPassword(user.password)
+                                Product.id,
+                                Product.name,
+                                Product.price
                             ])];
                     case 2:
                         result = _a.sent();
@@ -102,8 +94,8 @@ var UserModel = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         error_2 = _a.sent();
-                        throw new Error('Unable to create user ' +
-                            user.firstname +
+                        throw new Error('Unable to create Product ' +
+                            Product.name +
                             ':' +
                             error_2.message);
                     case 4: return [2 /*return*/];
@@ -111,7 +103,7 @@ var UserModel = /** @class */ (function () {
             });
         });
     };
-    UserModel.prototype.updateUser = function (user) {
+    ProductModel.prototype.updateProduct = function (Product) {
         return __awaiter(this, void 0, void 0, function () {
             var connect, SQLOrder, result, error_3;
             return __generator(this, function (_a) {
@@ -121,13 +113,11 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connect = _a.sent();
-                        SQLOrder = "UPDATE users SET user_name=$2,firstname=$3,lastname=$4 ,password=$5 WHERE id=$1  RETURNING id,user_name,firstname,lastname";
+                        SQLOrder = "UPDATE Products SET name=$2,price=$3 WHERE id=$1  RETURNING id,name,price";
                         return [4 /*yield*/, connect.query(SQLOrder, [
-                                user.id,
-                                user.user_name,
-                                user.firstname,
-                                user.lastname,
-                                hashPassword(user.password)
+                                Product.id,
+                                Product.name,
+                                Product.price
                             ])];
                     case 2:
                         result = _a.sent();
@@ -135,13 +125,13 @@ var UserModel = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         error_3 = _a.sent();
-                        throw new Error("couldn't find user ".concat(error_3.message));
+                        throw new Error("couldn't find Product ".concat(error_3.message));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserModel.prototype.deleteUser = function (id) {
+    ProductModel.prototype.deleteProduct = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var connect, SQLOrder, result, error_4;
             return __generator(this, function (_a) {
@@ -151,7 +141,7 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connect = _a.sent();
-                        SQLOrder = "DELETE FROM users WHERE id='".concat(id, "' RETURNING id,user_name,firstname,lastname");
+                        SQLOrder = "DELETE FROM Products WHERE id='".concat(id, "' RETURNING id,name,price");
                         return [4 /*yield*/, connect.query(SQLOrder)];
                     case 2:
                         result = _a.sent();
@@ -159,13 +149,13 @@ var UserModel = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         error_4 = _a.sent();
-                        throw new Error("couldn't delete user ".concat(error_4.message));
+                        throw new Error("couldn't delete Product ".concat(error_4.message));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserModel.prototype.ChooseUser = function (id) {
+    ProductModel.prototype.ChooseProduct = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var connect, SQLOrder, result, error_5;
             return __generator(this, function (_a) {
@@ -175,7 +165,7 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connect = _a.sent();
-                        SQLOrder = "SELECT id,user_name,firstname,lastname FROM users WHERE id='".concat(id, "'");
+                        SQLOrder = "SELECT id,name,price FROM Products WHERE id='".concat(id, "'");
                         return [4 /*yield*/, connect.query(SQLOrder)];
                     case 2:
                         result = _a.sent();
@@ -183,45 +173,12 @@ var UserModel = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         error_5 = _a.sent();
-                        throw new Error("couldn't find user ".concat(error_5.message));
+                        throw new Error("couldn't find Product ".concat(error_5.message));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserModel.prototype.authenticate = function (user_name, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var connect, SQLOrder, result, hashPassword_1, isValidPassword, userInformation, error_6;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 5, , 6]);
-                        return [4 /*yield*/, database_1.default.connect()];
-                    case 1:
-                        connect = _a.sent();
-                        SQLOrder = "SELECT password FROM users WHERE user_name='".concat(user_name, "'");
-                        return [4 /*yield*/, connect.query(SQLOrder)];
-                    case 2:
-                        result = _a.sent();
-                        if (!result.rows.length) return [3 /*break*/, 4];
-                        hashPassword_1 = result.rows[0].password;
-                        isValidPassword = bcrypt_1.default.compareSync("".concat(password).concat(config_1.default.pepper), hashPassword_1);
-                        if (!isValidPassword) return [3 /*break*/, 4];
-                        return [4 /*yield*/, connect.query("SELECT id,user_name,firstname,lastname FROM users WHERE user_name='".concat(user_name, "'"))];
-                    case 3:
-                        userInformation = _a.sent();
-                        return [2 /*return*/, userInformation.rows[0]];
-                    case 4:
-                        connect.release();
-                        return [2 /*return*/, null];
-                    case 5:
-                        error_6 = _a.sent();
-                        throw new Error("could't login : ".concat(error_6.message));
-                    case 6: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return UserModel;
+    return ProductModel;
 }());
-exports.default = UserModel;
+exports.default = ProductModel;

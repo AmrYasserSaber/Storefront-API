@@ -23,17 +23,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var controllers = __importStar(require("../../controllers/users.controllers"));
+var controllers = __importStar(require("../../controllers/Orders.controllers"));
 var authentication_middleware_1 = __importDefault(require("../../middleware/authentication.middleware"));
 var routes = (0, express_1.Router)();
 routes
     .route('/')
-    .get(authentication_middleware_1.default, controllers.getAllUsers)
-    .post(controllers.create);
+    .get(authentication_middleware_1.default, controllers.getAllOrders)
+    .post(authentication_middleware_1.default, controllers.create);
 routes
     .route('/:id')
-    .get(authentication_middleware_1.default, controllers.ChooseUser)
-    .patch(authentication_middleware_1.default, controllers.updateUser)
-    .delete(authentication_middleware_1.default, controllers.deleteUser);
-routes.route('/authenticate').post(controllers.authenticate);
+    .get(authentication_middleware_1.default, controllers.ChooseOrder)
+    .patch(authentication_middleware_1.default, controllers.updateOrder)
+    .delete(authentication_middleware_1.default, controllers.deleteOrder);
 exports.default = routes;

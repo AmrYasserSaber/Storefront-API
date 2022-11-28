@@ -7,7 +7,7 @@ var pg_1 = require("pg");
 var config_1 = __importDefault(require("../config"));
 var pool = new pg_1.Pool({
     host: config_1.default.host,
-    database: config_1.default.database,
+    database: config_1.default.db,
     user: config_1.default.user,
     password: config_1.default.password,
     port: parseInt(config_1.default.dbport, 10),

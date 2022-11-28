@@ -1,12 +1,18 @@
-import { Router } from 'express'
-import * as controllers from '../../controllers/users.controllers'
+import { Router } from 'express';
+import * as controllers from '../../controllers/users.controllers';
+import authenticattionMiddleware from '../../middleware/authentication.middleware';
 
 const routes = Router();
 
-routes.route('/').get(controllers.getAllUsers).post(controllers.create);
+routes
+    .route('/')
+    .get(authenticattionMiddleware, controllers.getAllUsers)
+    .post(controllers.create);
 routes
     .route('/:id')
-    .get(controllers.ChooseUser)
-    .patch(controllers.updateUser)
-    .delete(controllers.deleteUser)
+    .get(authenticattionMiddleware, controllers.ChooseUser)
+    .patch(authenticattionMiddleware, controllers.updateUser)
+    .delete(authenticattionMiddleware, controllers.deleteUser);
+
+routes.route('/authenticate').post(controllers.authenticate);
 export default routes;
