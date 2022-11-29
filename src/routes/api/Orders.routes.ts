@@ -7,7 +7,7 @@ const routes = Router();
 routes
     .route('/')
     .get(authenticattionMiddleware, controllers.getAllOrders)
-    .post(controllers.create);
+    .post(authenticattionMiddleware, controllers.create);
 routes
     .route('/:id')
     .get(authenticattionMiddleware, controllers.ChooseOrder)

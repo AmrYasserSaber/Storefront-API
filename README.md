@@ -61,7 +61,7 @@ the same for Products and Orders
 Schcema:
 
 
- Table "public.users"
+Table "public.users"
   Column   |          Type          | Collation | Nullable |      Default
 -----------+------------------------+-----------+----------+--------------------
  id        | uuid                   |           | not null | uuid_generate_v1()
@@ -92,4 +92,5 @@ Table "public.orders"
  status  | character varying(200) |           | not null |
 Indexes:
 "orders_pkey" PRIMARY KEY, btree (id)
+
 

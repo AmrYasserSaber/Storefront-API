@@ -6,11 +6,11 @@ const routes = Router();
 
 routes
     .route('/')
-    .get(authenticattionMiddleware, controllers.getAllProducts)
+    .get(controllers.getAllProducts)
     .post(authenticattionMiddleware, controllers.create);
 routes
     .route('/:id')
-    .get(authenticattionMiddleware, controllers.ChooseProduct)
+    .get(controllers.ChooseProduct)
     .patch(authenticattionMiddleware, controllers.updateProduct)
     .delete(authenticattionMiddleware, controllers.deleteProduct);
 
