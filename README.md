@@ -58,9 +58,10 @@ CRUD:
 the same for Products and Orders
 
 
+Schcema:
 
 
-                              Table "public.users"
+ Table "public.users"
   Column   |          Type          | Collation | Nullable |      Default
 -----------+------------------------+-----------+----------+--------------------
  id        | uuid                   |           | not null | uuid_generate_v1()
@@ -71,29 +72,24 @@ the same for Products and Orders
 Indexes:
     "users_pkey" PRIMARY KEY, btree (id)
     "users_user_name_key" UNIQUE CONSTRAINT, btree (user_name)
-
-
-                            Table "public.products"
+Table "public.products"
  Column |         Type          | Collation | Nullable |      Default
 --------+-----------------------+-----------+----------+--------------------
  id     | uuid                  |           | not null | uuid_generate_v1()
  name   | character varying(60) |           |          |
  price  | character varying(60) |           | not null |
 Indexes:
-    "products_pkey" PRIMARY KEY, btree (id)
-    "products_name_key" UNIQUE CONSTRAINT, btree (name)
+"products_pkey" PRIMARY KEY, btree (id)
+"products_name_key" UNIQUE CONSTRAINT, btree (name)
 
 
 
-                            Table "public.orders"
+Table "public.orders"
  Column  |          Type          | Collation | Nullable |      Default
 ---------+------------------------+-----------+----------+--------------------
  id      | uuid                   |           | not null | uuid_generate_v1()
  user_id | character varying(60)  |           | not null |
  status  | character varying(200) |           | not null |
 Indexes:
-    "orders_pkey" PRIMARY KEY, btree (id)
-
-
-    
+"orders_pkey" PRIMARY KEY, btree (id)
 
