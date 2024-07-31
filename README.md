@@ -4,19 +4,19 @@ This is the documentation for the Storefront API, which allows you to manage use
 
 ## Database Setup
 
-1. Create a user with the following command:
+1. Create a user with the following command
 
 
-2. Create the main database:
+2. Create the main database
 
 
-3. Create the testing database:
+3. Create the testing database
 
 
-4. Grant all privileges on the main database to the store_user:
+4. Grant all privileges on the main database to the store_user
 
 
-5. Grant all privileges on the testing database to the store_user:
+5. Grant all privileges on the testing database to the store_user
 
 
 ## .env Setup
@@ -196,7 +196,4 @@ Indexes:
 
 Indexes:
 - "orders_pkey" PRIMARY KEY, btree (id)
-
-Feel free to update this README file with any additional information or instructions as needed.
-
 
