@@ -162,13 +162,13 @@ Similar CRUD operations can be performed for Products and Orders by using the re
 
 ### Table "public.users"
 
-| Column     | Type                   | Collation | Nullable | Default           |
-| ---------- | ---------------------- | --------- | -------- | ----------------- |
-| id         | uuid                   |           | not null | uuid_generate_v1()|
-| user_name  | character varying(60)  |           |          |                   |
-| firstname  | character varying(60)  |           | not null |                   |
-| lastname   | character varying(60)  |           | not null |                   |
-| password   | character varying(300) |           | not null |                   |
+| Column     | Type                   | Nullable | Default           |
+| ---------- | ---------------------- | -------- | ----------------- |
+| id         | uuid                   | not null | uuid_generate_v1()|
+| user_name  | character varying(60)  |          |                   |
+| firstname  | character varying(60)  | not null |                   |
+| lastname   | character varying(60)  | not null |                   |
+| password   | character varying(300) | not null |                   |
 
 Indexes:
 - "users_pkey" PRIMARY KEY, btree (id)
@@ -176,11 +176,11 @@ Indexes:
 
 ### Table "public.products"
 
-| Column | Type                   | Collation | Nullable | Default           |
-| ------ | ---------------------- | --------- | -------- | ----------------- |
-| id     | uuid                   |           | not null | uuid_generate_v1()|
-| name   | character varying(60)  |           |          |                   |
-| price  | character varying(60)  |           | not null |                   |
+| Column | Type                   | Nullable | Default           |
+| ------ | ---------------------- | -------- | ----------------- |
+| id     | uuid                   | not null | uuid_generate_v1()|
+| name   | character varying(60)  |          |                   |
+| price  | character varying(60)  | not null |                   |
 
 Indexes:
 - "products_pkey" PRIMARY KEY, btree (id)
@@ -188,11 +188,11 @@ Indexes:
 
 ### Table "public.orders"
 
-| Column   | Type                   | Collation | Nullable | Default           |
-| ---------| ---------------------- | --------- | -------- | ----------------- |
-| id       | uuid                   |           | not null | uuid_generate_v1()|
-| user_id  | character varying(60)  |           | not null |                   |
-| status   | character varying(200) |           | not null |                   |
+| Column   | Type                   | Nullable | Default           |
+| ---------| ---------------------- | -------- | ----------------- |
+| id       | uuid                   | not null | uuid_generate_v1()|
+| user_id  | character varying(60)  | not null |                   |
+| status   | character varying(200) | not null |                   |
 
 Indexes:
 - "orders_pkey" PRIMARY KEY, btree (id)
